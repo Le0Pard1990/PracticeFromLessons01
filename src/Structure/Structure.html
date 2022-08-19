@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+    <link rel="stylesheet" href="structure.css">
+    
+    <title>CRUD project</title>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">CRUD example</div>
+
+    <!-- AddBox -->
+    <div class="add-box">
+        <input class="add-input" type="text" placeholder="ФИО">
+        <input class="add-inputage" type="text" placeholder="Возраст">
+        <div class="radio">
+            <input class="radio-input" type="radio" name="gender" id="radio_male">
+            <label class="radio-label" for="radio_male">Муж</label>
+        </div>
+        <div class="radio">
+            <input class="radio-input" type="radio" name="gender" id="radio_female">
+            <label class="radio-label" for="radio_female">Жен</label>
+        </div>
+        <button class="btn btn-add" type="submit">Добавить</button>
+    </div> 
+
+    <!-- SearchBox -->
+    <div class="search-box">
+        <div class="change-box">
+            <button class="btn btn-man" type="button">Мужчины</button>
+            <button class="btn btn-woman" type="button">Женщины</button>
+            <button class="btn btn-teenager" type="button">До 18 лет</button>
+            <input type="text" placeholder="Фильтр по инициалам">
+            <button class="btn" type="submit">Отфильтровать</button>
+        </div>
+    </div> 
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+            <th>ФИО</th>
+            <th>Пол</th>
+            <th>Возраст</th>
+            <th>Дата регистрации</th>
+        </thead>
+        <tbody>
+            <td>Петров Петр Петрович</td>
+            <td>Мужской</td>
+            <td>25</td>
+            <td>11.08.2022
+                <button type='button'
+                class='btn-trash btn-sm'>
+                <i class="fas fa-trash"></i>
+                </button>
+            </td>
+        </tbody>
+    </table>   
+</body>
+</html>
