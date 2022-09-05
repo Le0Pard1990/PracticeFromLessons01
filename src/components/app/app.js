@@ -19,15 +19,21 @@ function App() {
 
   useEffect(() => {
     console.log('useEffect');
-    getResource('http://localhost:3000/employees')
-      .then(data => setData(data));
+    getEmployesList();
   }, [])
 
+  const getEmployesList = () => {
+    getResource('http://localhost:3000/employees')
+      .then(data => setData(data));
+  }
+
   const deleteItem = (id) => {
-    deleteData('http://localhost:3000/employees')
-    .then(data => data.filter(item => item.id !== id));
+    deleteData('http://localhost:3000/employees', id)
+      .then(() => {
+        getEmployesList();
+      });
     console.log('deleteItem');
-    setData((data) => data.filter(item => item.id !== id));
+    /* setData((data) => data.filter(item => item.id !== id)); */
   }
 
   const toggleIncrease = (id) => {
@@ -53,13 +59,7 @@ function App() {
 
     if (newItem.name.length === 0 || newItem.salary.length === 0) {
       return data
-    } else {
-      setData((data) => {
-        const newArr = data.slice();
-        newArr.push(newItem);
-        return newArr
-      })
-    }
+    } else {getEmployesList()}
   }
 
   const updateSearch = (term) => {

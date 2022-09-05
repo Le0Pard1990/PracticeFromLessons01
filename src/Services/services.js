@@ -1,3 +1,4 @@
+/* переделать в классы, url в отдельную ПР*/
 export const postData = async (url, data) => {
     const responsePost = await fetch (url, {
         method: 'POST',
@@ -20,8 +21,8 @@ export async function getResource(url) {
     return await responseGet.json();
 }
 
-export const deleteData = async (url) => {
-    const responseDel = await fetch(url, {
+export const deleteData = async (url, id) => {
+    const responseDel = await fetch(url + '/' + id, {
         method: 'DELETE',
     })
 
