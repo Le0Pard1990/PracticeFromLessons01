@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { getResource, deleteData } from '../../Services/services';
 
 import AppInfo from '../app-info/app-info';
 import SearchPanel from '../search-panel/search-panel';
@@ -11,18 +12,22 @@ import './app.css';
 
 function App() {
 
-  const [data, setData] = useState([
-    {name: 'John C.', salary: 800, increase: false, id: 1},
-    {name: 'Alex M.', salary: 3000, increase: true, id: 2},
-    {name: 'Carl W.', salary: 500, increase: false, id: 3},
-    ]);
+  const [data, setData] = useState([]);
   const [term, setTerm] = useState('');
   const [filter, setFilter] = useState('all');
-  const [maxId, setMaxId] = useState(4)
+  const [maxId, setMaxId] = useState(data.length)
+
+  useEffect(() => {
+    console.log('useEffect');
+    getResource('http://localhost:3000/employees')
+      .then(data => setData(data));
+  }, [])
 
   const deleteItem = (id) => {
-    console.log('deleteItem')
-    setData((data) => data.filter(item => item.id !== id))
+    deleteData('http://localhost:3000/employees')
+    .then(data => data.filter(item => item.id !== id));
+    console.log('deleteItem');
+    setData((data) => data.filter(item => item.id !== id));
   }
 
   const toggleIncrease = (id) => {
@@ -37,6 +42,7 @@ function App() {
 
   const addItem = (name, salary) => {
     console.log('addItem')
+
     setMaxId(maxId => maxId + 1)
     const newItem = {
       name: name,
