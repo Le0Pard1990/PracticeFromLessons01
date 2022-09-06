@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { postData } from '../../Services/services';
+import { useService } from '../../Services/services';
 
 import './employees-add-form.css';
 
@@ -7,6 +7,8 @@ const EmployeesAddForm = (props) => {
 
     const [name, setName] = useState('');
     const [salary, setSalary] = useState('');
+
+    const {postData, serverUrl} = useService()
 
 
     const onValueChangeName = (e) => {
@@ -22,13 +24,11 @@ const EmployeesAddForm = (props) => {
         //FormData будет использовать только те поля ввода, которые используют атрибут name.
         const formData = new FormData(e.target);
         const json = JSON.stringify(Object.fromEntries(formData.entries()));
-        postData('http://localhost:3000/employees', json)
+        postData(serverUrl, json)
             .then(() => props.onAddItem(name, salary))
         setName(() => '');
         setSalary(() => '')
     }
-
-
 
     return (
         <div className="app-add-form">

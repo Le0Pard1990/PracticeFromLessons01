@@ -3,7 +3,6 @@ import EmployeesListItem from "../employees-list-item/employees-list-item";
 import './employees-list.css';
 
 const EmployeesList = (props) => {
-    console.log('render EmployeesList')
     const elements = props.data.map(item => {
         
         return (

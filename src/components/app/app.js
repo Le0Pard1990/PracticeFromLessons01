@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getResource, deleteData } from '../../Services/services';
+import { useService } from '../../Services/services';
 
 import AppInfo from '../app-info/app-info';
 import SearchPanel from '../search-panel/search-panel';
@@ -15,25 +15,25 @@ function App() {
   const [data, setData] = useState([]);
   const [term, setTerm] = useState('');
   const [filter, setFilter] = useState('all');
-  const [maxId, setMaxId] = useState(data.length)
+  const [maxId, setMaxId] = useState(data.length);
+
+  const {getResource, deleteData, serverUrl} = useService();
 
   useEffect(() => {
-    console.log('useEffect');
     getEmployesList();
   }, [])
 
+
   const getEmployesList = () => {
-    getResource('http://localhost:3000/employees')
+    getResource(serverUrl)
       .then(data => setData(data));
   }
 
   const deleteItem = (id) => {
-    deleteData('http://localhost:3000/employees', id)
+    deleteData(serverUrl, id)
       .then(() => {
         getEmployesList();
       });
-    console.log('deleteItem');
-    /* setData((data) => data.filter(item => item.id !== id)); */
   }
 
   const toggleIncrease = (id) => {
@@ -41,7 +41,7 @@ function App() {
       return data.map(item => {
         if (item.id === id) {
           return {...item, increase: !item.increase}
-        } else {return item}
+        } else return item
       })
     })
   }
